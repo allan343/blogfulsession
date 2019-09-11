@@ -25,7 +25,13 @@ app.get('/articles/:article_id', (req, res, next) => {
   const knexInstance = req.app.get('db')
   ArticlesService.getById(knexInstance, req.params.article_id)
     .then(article => {
-      res.json(article)
+      res.json(articles.map(article => ({
+                 id: article.id,
+                 title: article.title,
+                 style: article.style,
+                 content: article.content,
+                 date_published: new Date(article.date_published),
+              })))
     })
     .catch(next)
 })

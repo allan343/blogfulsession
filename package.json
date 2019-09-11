@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "content-security-policy-builder": "^2.1.0",
     "cors": "^2.8.5",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
@@ -27,7 +28,7 @@
     "chai": "^4.2.0",
     "mocha": "^6.2.0",
     "nodemon": "^1.19.1",
-    "postgrator-cli": "^3.2.0",
+    "postgrator-cli": "^3.3.0",
     "supertest": "^4.0.2"
   }
 }
