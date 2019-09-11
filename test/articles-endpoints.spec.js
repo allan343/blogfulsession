@@ -55,7 +55,7 @@ describe.only('Articles Endpoints', function() {
         .into('blogful_articles')
         .insert(testArticles)
     })
-/*
+
     it('GET /articles responds with 200 and all of the articles', () => {
       return supertest(app)
         .get('/articles')
