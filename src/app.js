@@ -68,6 +68,7 @@ app.post('/articles', jsonParser, (req, res, next) => {
      .then(article => {
        res
          .status(201)
+         .location(`/articles/${article.id}`)
          .json(article)
      })
      .catch(next)
