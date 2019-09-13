@@ -91,4 +91,18 @@ describe(`GET /articles/:article_id`, () => {
   })
 })
 
+describe.only(`POST /articles`, () => {
+     it(`creates an article, responding with 201 and the new article`,  function() {
+       return supertest(app)
+         .post('/articles')
+         .send({
+           title: 'Test new article',
+           style: 'Listicle',
+           content: 'Test new article content...'
+         })
+         .expect(201)
+     })
+   })
+
+
 })
