@@ -144,6 +144,18 @@ describe.only(`POST /articles`, () => {
                  })
              })
 
+             it(`responds with 400 and an error message when the 'style' is missing`, () => {
+                   return supertest(app)
+                     .post('/articles')
+                     .send({
+                       title: 'Test new article',
+                       content: 'Test new article content...'
+                     })
+                     .expect(400, {
+                       error: { message: `Missing 'style' in request body` }
+                     })
+                 })
+
 
    })
 
