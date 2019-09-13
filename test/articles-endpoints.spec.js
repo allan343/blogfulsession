@@ -91,7 +91,7 @@ describe(`GET /articles/:article_id`, () => {
   })
 })
 
-describe(`POST /articles`, () => {
+describe.only(`POST /articles`, () => {
   it(`creates an article, responding with 201 and the new article`, function() {
         this.retries(3)
       const newArticle = {
@@ -119,6 +119,19 @@ describe(`POST /articles`, () => {
                    .expect(postRes.body)// ask luke about this.
                )
      })
+
+     it(`responds with 400 and an error message when the 'title' is missing`, () => {
+           return supertest(app)
+             .post('/articles')
+             .send({
+               style: 'Listicle',
+               content: 'Test new article content...'
+             })
+             .expect(400, {
+               error: { message: `Missing 'title' in request body` }
+             })
+         })
+
    })
 
 
