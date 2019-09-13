@@ -7,6 +7,7 @@ const { NODE_ENV } = require('./config')
 const ArticlesService = require('./articles-service')
 
 const app = express()
+const jsonParser = express.json()
 
 app.use(morgan((NODE_ENV === 'production') ? 'tiny' : 'common'))
 app.use(cors())
@@ -56,8 +57,11 @@ app.use(function errorHandler(error, req, res, next) {
   res.status(500).json(response)
 })
 
-app.post('/articles', (req, res, next) => {
-     res.status(201).send('stuff')
-   })
+app.post('/articles', jsonParser, (req, res, next) => {
+  res.status(201).json({
+       ...req.body,
+       id: 12,
+     })
+    })
 
 module.exports = app
