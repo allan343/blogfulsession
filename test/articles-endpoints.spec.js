@@ -108,6 +108,11 @@ describe.only(`POST /articles`, () => {
          expect(res.body.content).to.eql(newArticle.content)
          expect(res.body).to.have.property('id')
        })
+       .then(postRes =>
+               supertest(app)
+                   .get(`/articles/${postRes.body.id}`)
+                   .expect(postRes.body)
+               )
      })
    })
 
