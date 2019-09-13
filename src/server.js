@@ -10,6 +10,11 @@
 
 app.set('db', db)
 
+/*
 app.listen(postgratorconfig.port, () => {
   console.log(`Server listening at http://localhost:${postgratorconfig.port}`)
+})*/
+
+app.listen(PORT, () => {
+  console.log(`Server listening at http://localhost:${PORT}`)
 })
