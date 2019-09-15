@@ -204,4 +204,42 @@ describe.only(`POST /api/articles`, () => {
          })
        })
       })
+
+       describe.only(`PATCH /api/articles/:article_id`, () => {
+           context(`Given no articles`, () => {
+             it(`responds with 404`, () => {
+               const articleId = 123456
+               return supertest(app)
+                 .patch(`/api/articles/${articleId}`)
+                 .expect(404, { error: { message: `Article doesn't exist` } })
+             })
+           })
+           context('Given there are articles in the database', () => {
+                 const testArticles = makeArticlesArray()
+            
+                 beforeEach('insert articles', () => {
+                   return db
+                     .into('blogful_articles')
+                     .insert(testArticles)
+                 })
+            
+                 it('responds with 204 and updates the article', () => {
+                   const idToUpdate = 2
+                   const updateArticle = {
+                     title: 'updated article title',
+                     style: 'Interview',
+                     content: 'updated article content',
+                   }
+                   return supertest(app)
+                     .patch(`/api/articles/${idToUpdate}`)
+                     .send(updateArticle)
+                     .expect(204)
+                 })
+              })
+
+
+
+
+         })
+
 })

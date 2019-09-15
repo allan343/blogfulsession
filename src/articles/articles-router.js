@@ -79,4 +79,8 @@ articlesRouter
       .catch(next)
   })
 
+  .patch((req, res) => {
+       res.status(204).end()
+     })
+
 module.exports = articlesRouter
