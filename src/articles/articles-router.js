@@ -79,8 +79,20 @@ articlesRouter
       .catch(next)
   })
 
-  .patch((req, res) => {
-       res.status(204).end()
-     })
+   .patch(jsonParser, (req, res, next) => {
+       const { title, content, style } = req.body
+       const articleToUpdate = { title, content, style }
+    
+    
+       ArticlesService.updateArticle(
+         req.app.get('db'),
+         req.params.article_id,
+         articleToUpdate
+       )
+         .then(numRowsAffected => {
+           res.status(204).end()
+         })
+         .catch(next)
+      })
 
 module.exports = articlesRouter

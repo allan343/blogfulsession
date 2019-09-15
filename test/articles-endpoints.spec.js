@@ -230,10 +230,21 @@ describe.only(`POST /api/articles`, () => {
                      style: 'Interview',
                      content: 'updated article content',
                    }
+
+                   const expectedArticle = {
+                         ...testArticles[idToUpdate - 1],
+                         ...updateArticle
+                       }
+                      // console.log("expected is "+expectedArticle);
                    return supertest(app)
                      .patch(`/api/articles/${idToUpdate}`)
                      .send(updateArticle)
                      .expect(204)
+                     .then(res =>
+                             supertest(app)
+                               .get(`/api/articles/${idToUpdate}`)
+                               .expect(expectedArticle)
+                           )
                  })
               })
 
